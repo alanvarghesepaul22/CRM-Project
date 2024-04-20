@@ -1,91 +1,63 @@
-import { useState } from "react";
-import { IoClose } from "react-icons/io5";
-import { LuMenu, LuPackage2 } from "react-icons/lu";
+import React, { useContext } from "react";
+import { IoIosLogOut } from "react-icons/io";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
-const NavBar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const Navbar = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+  const token = localStorage.getItem("authTokens");
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  if (user) {
+    const decoded = jwtDecode(token);
+    let user_id = decoded.user_id;
+    console.log(user_id);
+  }
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b border-b-neutral-500  px-4 md:px-6 text-neutral-400">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <Link
-          to="/"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-        >
-          <LuPackage2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
+    <nav className="w-full bg-neutral-900 py-3">
+      <div className="w-full flex justify-between items-center px-5">
+        <Link className="text-xl font-semibold text-orange-400" to="/">
+          CRM APP
         </Link>
-        <Link
-          to="/dashboard"
-          className="text-foreground transition-colors hover:text-foreground"
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/product"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Products
-        </Link>
-        <Link
-          to="/order"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Orders
-        </Link>
-        <Link
-          to="/chat"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Chat
-        </Link>
-      </nav>
-
-      <div className="relative flex md:hidden">
-        <button onClick={toggleMenu}>
-          {menuOpen ? <IoClose /> : <LuMenu />}
-        </button>
-        {menuOpen && (
-          <div
-            className={`w-0 mt-10 absolute left-0 top-0 bg-neutral-900 text-white overflow-hidden transition-all duration-300 px-10 py-44 ${
-              menuOpen ? "w-64" : "w-0"
-            }`}
-          >
-            <nav className="flex flex-col gap-6 text-lg font-medium">
-              <Link
-                to="/dashboard"
-                className="text-foreground transition-colors hover:text-foreground hover:text-blue-500"
-              >
-                Dashboard
-              </Link>
-              <Link
-                to="/product"
-                className="text-muted-foreground transition-colors hover:text-foreground hover:text-blue-500"
-              >
-                Products
-              </Link>
-              <Link
-                to="/order"
-                className="text-muted-foreground transition-colors hover:text-foreground hover:text-blue-500"
-              >
-                Orders
-              </Link>
-              <Link
-                to="/chat"
-                className="text-muted-foreground transition-colors hover:text-foreground hover:text-blue-500"
-              >
-                Chat
-              </Link>
-            </nav>
-          </div>
-        )}
+        <div className="" id="navbarSupportedContent">
+          <ul className="w-full flex justify-center items-center gap-4">
+            {user ? (
+              <>
+                <li className="">
+                  <Link className="hover:text-orange-400" to="">
+                    Add Record
+                  </Link>
+                </li>
+                <li className="hover:bg-neutral-800 px-3 py-1 rounded-lg">
+                  <button
+                    type="button"
+                    onClick={logoutUser}
+                    className="flex justify-center items-center gap-2"
+                  >
+                    Logout
+                    <IoIosLogOut />
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="bg-orange-400 hover:bg-orange-500 px-2 py-1 rounded-lg">
+                  <Link className="" to="/register">
+                    Register
+                  </Link>
+                </li>
+                <li className="hover:text-orange-400">
+                  <Link className="" to="/login">
+                    Login
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
-    </header>
+    </nav>
   );
 };
 
-export default NavBar;
+export default Navbar;
