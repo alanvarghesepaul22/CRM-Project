@@ -13,7 +13,7 @@ import DashboardPage from "./components/pages/dashboard/DashboardPage";
 import ProductPage from "./components/pages/product/ProductPage";
 import OrderPage from "./components/pages/order/OrderPage";
 import ChatPage from "./components/pages/chat/ChatPage";
-import RegisterForm from "./components/RegisterForm";
+import RegisterForm from "./components/common/RegisterForm";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
