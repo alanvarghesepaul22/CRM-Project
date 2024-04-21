@@ -21,7 +21,7 @@ This CRM project aims to streamline customer management processes for businesses
 - React
 - Redux (optional, for state management)
 - React Router (for client-side routing)
-- Material-UI (for UI components)
+- Tailwind CSS and Bootstrap (for UI components)
 - Axios (for making HTTP requests)
 
 ### Backend
@@ -30,13 +30,13 @@ This CRM project aims to streamline customer management processes for businesses
 - Django
 - Django REST Framework (for building RESTful APIs)
 - Django ORM (for database interactions)
-- PostgreSQL (recommended, but you can use other databases supported by Django)
+- MySQL DB
 
 ## Getting Started
 
 To get started with the project:
 
-1. Clone the repository: git clone https://github.com/your-username/crm-project.git
+1. Clone the repository: git clone https://github.com/alanvarghesepaul22/CRM-Project.git
 2. Install frontend dependencies: cd crm-project/frontend && npm install
 3. Install backend dependencies: cd ../backend && pip install -r requirements.txt
 4. Configure the backend by creating a .env file in the backend directory with necessary environment variables.
