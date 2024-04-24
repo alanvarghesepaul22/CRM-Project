@@ -1,13 +1,16 @@
+import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/common/NavBar";
+import { AuthProvider } from "./context/AuthContext";
 
-function App() {
+const App = () => {
   return (
-    <div className="w-full h-screen flex flex-col  bg-neutral-950 text-neutral-100">
-      <Navbar/>
-      <Outlet/>
+    <div className="h-screen w-full bg-neutral-100 text-neutral-950">
+      <AuthProvider>
+        <Navbar />
+        <Outlet />
+      </AuthProvider>
     </div>
   );
-}
+};
 
 export default App;
