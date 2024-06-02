@@ -22,6 +22,18 @@ const ReadRecords = () => {
     fetchRecords();
   }, []);
 
+  const deleteRecord = async (id) => {
+    try {
+        await axios.delete(
+        `http://127.0.0.1:8000/api/records/${id}`
+      );
+      const newRecords = records.filter((record) => record.id !== id)
+      setRecords(newRecords)
+    } catch (error) {
+      console.error("Error deleting record");
+    }
+  };
+
   return (
     <div className="w-4/5">
       <h2 className="text-xl font-bold mb-4"> All Records</h2>
@@ -58,12 +70,13 @@ const ReadRecords = () => {
                   >
                     <FaRegEdit />
                   </Link>
-                  <Link
-                    to={"/dashboard/edit-record"}
+                  <button
+                    // to={"/dashboard/edit-record"}
+                    onClick={() => deleteRecord(record.id)}
                     className="w-full flex justify-center items-center bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded"
                   >
                     <MdDelete />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
